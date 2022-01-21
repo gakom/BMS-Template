@@ -1,7 +1,5 @@
-//#include "led.h"
 #include "delay.h"
 #include "sys.h"
-//#include "usart.h"
 #include "includes.h"
 #include "SEGGER_RTT.h"
 
@@ -11,40 +9,40 @@
 /*
 ****************************************************************************************
 
-	¿ªÊ¼ÈÎÎñ
+	å¼€å§‹ä»»åŠ¡
 
 ****************************************************************************************
 */
 
-//ÈÎÎñÓÅÏÈ¼¶
+//ä»»åŠ¡ä¼˜å…ˆçº§
 #define START_TASK_PRIO		3
-//ÈÎÎñ¶ÑÕ»´óÐ¡	
+//ä»»åŠ¡å †æ ˆå¤§å°	
 #define START_STK_SIZE 		512
-//ÈÎÎñ¿ØÖÆ¿é
+//ä»»åŠ¡æŽ§åˆ¶å—
 OS_TCB StartTaskTCB;
-//ÈÎÎñ¶ÑÕ»	
+//ä»»åŠ¡å †æ ˆ	
 CPU_STK START_TASK_STK[START_STK_SIZE];
-//ÈÎÎñº¯Êý
+//ä»»åŠ¡å‡½æ•°
 void start_task(void *p_arg);
 
 
 /*
 ****************************************************************************************
 
-	ÈÎÎñ²âÊÔ1
+	ä»»åŠ¡æµ‹è¯•1
 
 ****************************************************************************************
 */
 
-//ÈÎÎñÓÅÏÈ¼¶
+//ä»»åŠ¡ä¼˜å…ˆçº§
 #define Task_Test_1_task_PRIO		6
-//ÈÎÎñ¶ÑÕ»´óÐ¡
+//ä»»åŠ¡å †æ ˆå¤§å°
 #define Task_Test_1_task_SIZE		128
-//ÈÎÎñ¿ØÖÆ¿é
+//ä»»åŠ¡æŽ§åˆ¶å—
 OS_TCB	Task_Test_1_task_TCB;
-//ÈÎÎñ¶ÑÕ»
+//ä»»åŠ¡å †æ ˆ
 CPU_STK	Task_Test_1_task_STK[Task_Test_1_task_SIZE];
-//ÈÎÎñº¯Êý
+//ä»»åŠ¡å‡½æ•°
 void Task_Test_1_task(void *p_arg);
 
 
@@ -52,20 +50,20 @@ void Task_Test_1_task(void *p_arg);
 /*
 ****************************************************************************************
 
-	ÈÎÎñ²âÊÔ2
+	ä»»åŠ¡æµ‹è¯•2
 
 ****************************************************************************************
 */
 
-//ÈÎÎñÓÅÏÈ¼¶
+//ä»»åŠ¡ä¼˜å…ˆçº§
 #define Task_Test_2_task_PRIO		7
-//ÈÎÎñ¶ÑÕ»´óÐ¡
+//ä»»åŠ¡å †æ ˆå¤§å°
 #define Task_Test_2_task_SIZE		128
-//ÈÎÎñ¿ØÖÆ¿é
+//ä»»åŠ¡æŽ§åˆ¶å—
 OS_TCB	Task_Test_2_task_TCB;
-//ÈÎÎñ¶ÑÕ»
+//ä»»åŠ¡å †æ ˆ
 CPU_STK	Task_Test_2_task_STK[Task_Test_2_task_SIZE];
-//ÈÎÎñº¯Êý
+//ä»»åŠ¡å‡½æ•°
 void Task_Test_2_task(void *p_arg);
 
 
@@ -73,20 +71,20 @@ void Task_Test_2_task(void *p_arg);
 /*
 ****************************************************************************************
 
-	ÈÎÎñ²âÊÔ3
+	ä»»åŠ¡æµ‹è¯•3
 
 ****************************************************************************************
 */
 
-//ÈÎÎñÓÅÏÈ¼¶
+//ä»»åŠ¡ä¼˜å…ˆçº§
 #define Task_Test_3_task_PRIO		8
-//ÈÎÎñ¶ÑÕ»´óÐ¡
+//ä»»åŠ¡å †æ ˆå¤§å°
 #define Task_Test_3_task_SIZE		128
-//ÈÎÎñ¿ØÖÆ¿é
+//ä»»åŠ¡æŽ§åˆ¶å—
 OS_TCB	Task_Test_3_task_TCB;
-//ÈÎÎñ¶ÑÕ»
+//ä»»åŠ¡å †æ ˆ
 CPU_STK	Task_Test_3_task_STK[Task_Test_3_task_SIZE];
-//ÈÎÎñº¯Êý
+//ä»»åŠ¡å‡½æ•°
 void Task_Test_3_task(void *p_arg);
 
 
@@ -95,20 +93,20 @@ void Task_Test_3_task(void *p_arg);
 /*
 ****************************************************************************************
 
-	¼ì²âtaskµÄ¶ÑÕ»¡¢CPUÊ¹ÓÃÇé¿ö
+	æ£€æµ‹taskçš„å †æ ˆã€CPUä½¿ç”¨æƒ…å†µ
 
 ****************************************************************************************
 */
 
-//ÈÎÎñÓÅÏÈ¼¶
+//ä»»åŠ¡ä¼˜å…ˆçº§
 #define Check_Stack_Cup_task_PRIO		20
-//ÈÎÎñ¶ÑÕ»´óÐ¡
+//ä»»åŠ¡å †æ ˆå¤§å°
 #define Check_Stack_Cup_task_SIZE		128
-//ÈÎÎñ¿ØÖÆ¿é
+//ä»»åŠ¡æŽ§åˆ¶å—
 OS_TCB	Check_Stack_Cup_task_TCB;
-//ÈÎÎñ¶ÑÕ»
+//ä»»åŠ¡å †æ ˆ
 CPU_STK	Check_Stack_Cup_task_STK[Check_Stack_Cup_task_SIZE];
-//ÈÎÎñº¯Êý
+//ä»»åŠ¡å‡½æ•°
 void Check_Stack_Cup_task(void *p_arg);
 
 
@@ -176,6 +174,7 @@ void Task_Test_3_task(void *p_arg)
 
 ****************************************************************************************
 */
+
 void Check_Stack_Cup_task(void *p_arg)
 {
 	OS_ERR err;
@@ -219,7 +218,7 @@ void Check_Stack_Cup_task(void *p_arg)
 
 ****************************************************************************************
 */
-//¿ªÊ¼ÈÎÎñº¯Êý
+//å¼€å§‹ä»»åŠ¡å‡½æ•°
 void start_task(void *p_arg)
 {
 	OS_ERR err;
@@ -228,19 +227,19 @@ void start_task(void *p_arg)
 
 	CPU_Init();
 #if OS_CFG_STAT_TASK_EN > 0u
-   OSStatTaskCPUUsageInit(&err);  	//Í³¼ÆÈÎÎñ                
+   OSStatTaskCPUUsageInit(&err);  	//ç»Ÿè®¡ä»»åŠ¡                
 #endif
 	
-#ifdef CPU_CFG_INT_DIS_MEAS_EN		//Èç¹ûÊ¹ÄÜÁË²âÁ¿ÖÐ¶Ï¹Ø±ÕÊ±¼ä
+#ifdef CPU_CFG_INT_DIS_MEAS_EN		//å¦‚æžœä½¿èƒ½äº†æµ‹é‡ä¸­æ–­å…³é—­æ—¶é—´
     CPU_IntDisMeasMaxCurReset();	
 #endif
 	
-#if	OS_CFG_SCHED_ROUND_ROBIN_EN  //µ±Ê¹ÓÃÊ±¼äÆ¬ÂÖ×ªµÄÊ±ºò
-	 //Ê¹ÄÜÊ±¼äÆ¬ÂÖ×ªµ÷¶È¹¦ÄÜ,Ê±¼äÆ¬³¤¶ÈÎª1¸öÏµÍ³Ê±ÖÓ½ÚÅÄ£¬¼È1*5=5ms
+#if	OS_CFG_SCHED_ROUND_ROBIN_EN  //å½“ä½¿ç”¨æ—¶é—´ç‰‡è½®è½¬çš„æ—¶å€™
+	 //ä½¿èƒ½æ—¶é—´ç‰‡è½®è½¬è°ƒåº¦åŠŸèƒ½,æ—¶é—´ç‰‡é•¿åº¦ä¸º1ä¸ªç³»ç»Ÿæ—¶é’ŸèŠ‚æ‹ï¼Œæ—¢1*5=5ms
 	OSSchedRoundRobinCfg(DEF_ENABLED,1,&err);  
 #endif		
 	
-	OS_CRITICAL_ENTER();	//½øÈëÁÙ½çÇø
+	OS_CRITICAL_ENTER();	//è¿›å…¥ä¸´ç•ŒåŒº
 
 	OSTaskCreate((OS_TCB 	* )&Task_Test_1_task_TCB,		
 				 (CPU_CHAR	* )"Task_Test_1_task", 		
@@ -298,8 +297,8 @@ void start_task(void *p_arg)
                  (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, 
                  (OS_ERR 	* )&err);	
 
-	OS_TaskSuspend((OS_TCB*)&StartTaskTCB,&err);		//¹ÒÆð¿ªÊ¼ÈÎÎñ			 
-	OS_CRITICAL_EXIT();	//½øÈëÁÙ½çÇø
+	OS_TaskSuspend((OS_TCB*)&StartTaskTCB,&err);		//æŒ‚èµ·å¼€å§‹ä»»åŠ¡			 
+	OS_CRITICAL_EXIT();	//è¿›å…¥ä¸´ç•ŒåŒº
 }
 
 
@@ -318,29 +317,29 @@ int main(void)
 	OS_ERR err;
 	CPU_SR_ALLOC();
 	
-	delay_init();       //ÑÓÊ±³õÊ¼»¯
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //ÖÐ¶Ï·Ö×éÅäÖÃ
+	//delay_init();       //å»¶æ—¶åˆå§‹åŒ–
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //ä¸­æ–­åˆ†ç»„é…ç½®
 
 	//SEGGER_RTT_Init();
 
-	OSInit(&err);		//³õÊ¼»¯UCOSIII
-	OS_CRITICAL_ENTER();//½øÈëÁÙ½çÇø
-	//´´½¨¿ªÊ¼ÈÎÎñ
-	OSTaskCreate((OS_TCB 	* )&StartTaskTCB,		//ÈÎÎñ¿ØÖÆ¿é
-				 (CPU_CHAR	* )"start task", 		//ÈÎÎñÃû×Ö
-                 (OS_TASK_PTR )start_task, 			//ÈÎÎñº¯Êý
-                 (void		* )0,					//´«µÝ¸øÈÎÎñº¯ÊýµÄ²ÎÊý
-                 (OS_PRIO	  )START_TASK_PRIO,     //ÈÎÎñÓÅÏÈ¼¶
-                 (CPU_STK   * )&START_TASK_STK[0],	//ÈÎÎñ¶ÑÕ»»ùµØÖ·
-                 (CPU_STK_SIZE)START_STK_SIZE/10,	//ÈÎÎñ¶ÑÕ»Éî¶ÈÏÞÎ»
-                 (CPU_STK_SIZE)START_STK_SIZE,		//ÈÎÎñ¶ÑÕ»´óÐ¡
-                 (OS_MSG_QTY  )0,					//ÈÎÎñÄÚ²¿ÏûÏ¢¶ÓÁÐÄÜ¹»½ÓÊÕµÄ×î´óÏûÏ¢ÊýÄ¿,Îª0Ê±½ûÖ¹½ÓÊÕÏûÏ¢
-                 (OS_TICK	  )0,					//µ±Ê¹ÄÜÊ±¼äÆ¬ÂÖ×ªÊ±µÄÊ±¼äÆ¬³¤¶È£¬Îª0Ê±ÎªÄ¬ÈÏ³¤¶È£¬
-                 (void   	* )0,					//ÓÃ»§²¹³äµÄ´æ´¢Çø
-                 (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, //ÈÎÎñÑ¡Ïî
-                 (OS_ERR 	* )&err);				//´æ·Å¸Ãº¯Êý´íÎóÊ±µÄ·µ»ØÖµ
-	OS_CRITICAL_EXIT();	//ÍË³öÁÙ½çÇø	 
-	OSStart(&err);  //¿ªÆôUCOSIII
+	OSInit(&err);		//åˆå§‹åŒ–UCOSIII
+	OS_CRITICAL_ENTER();//è¿›å…¥ä¸´ç•ŒåŒº
+	//åˆ›å»ºå¼€å§‹ä»»åŠ¡
+	OSTaskCreate((OS_TCB 	* )&StartTaskTCB,		//ä»»åŠ¡æŽ§åˆ¶å—
+				 (CPU_CHAR	* )"start task", 		//ä»»åŠ¡åå­—
+                 (OS_TASK_PTR )start_task, 			//ä»»åŠ¡å‡½æ•°
+                 (void		* )0,					//ä¼ é€’ç»™ä»»åŠ¡å‡½æ•°çš„å‚æ•°
+                 (OS_PRIO	  )START_TASK_PRIO,     //ä»»åŠ¡ä¼˜å…ˆçº§
+                 (CPU_STK   * )&START_TASK_STK[0],	//ä»»åŠ¡å †æ ˆåŸºåœ°å€
+                 (CPU_STK_SIZE)START_STK_SIZE/10,	//ä»»åŠ¡å †æ ˆæ·±åº¦é™ä½
+                 (CPU_STK_SIZE)START_STK_SIZE,		//ä»»åŠ¡å †æ ˆå¤§å°
+                 (OS_MSG_QTY  )0,					//ä»»åŠ¡å†…éƒ¨æ¶ˆæ¯é˜Ÿåˆ—èƒ½å¤ŸæŽ¥æ”¶çš„æœ€å¤§æ¶ˆæ¯æ•°ç›®,ä¸º0æ—¶ç¦æ­¢æŽ¥æ”¶æ¶ˆæ¯
+                 (OS_TICK	  )0,					//å½“ä½¿èƒ½æ—¶é—´ç‰‡è½®è½¬æ—¶çš„æ—¶é—´ç‰‡é•¿åº¦ï¼Œä¸º0æ—¶ä¸ºé»˜è®¤é•¿åº¦ï¼Œ
+                 (void   	* )0,					//ç”¨æˆ·è¡¥å……çš„å­˜å‚¨åŒº
+                 (OS_OPT      )OS_OPT_TASK_STK_CHK|OS_OPT_TASK_STK_CLR, //ä»»åŠ¡é€‰é¡¹
+                 (OS_ERR 	* )&err);				//å­˜æ”¾è¯¥å‡½æ•°é”™è¯¯æ—¶çš„è¿”å›žå€¼
+	OS_CRITICAL_EXIT();	//é€€å‡ºä¸´ç•ŒåŒº	 
+	OSStart(&err);  //å¼€å¯UCOSIII
 	while(1);
 }
 
