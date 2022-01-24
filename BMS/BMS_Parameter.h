@@ -5,25 +5,33 @@
 #include "includes.h"
 
 
-//总压过压告警
-#define ParaAlarm_TotalVolOver				(830)	//单位:0.1V
-#define ParaAlarm_TotalVolOverFree			(820)	//单位:0.1V
-#define ParaAlarm_TotalVolDelay				(10)	//单位:0.1S
 
+//电池信息
+#define BMS_Cell_Numer 20
+#define BMS_Temp_Numer 5
+
+
+
+
+
+//总压过压告警
+#define ParaAlarm_TotalVolOver				(8300)	//单位:0.01V
+#define ParaAlarm_TotalVolOverFree			(8200)	//单位:0.01V
+#define ParaAlarm_TotalVolFreeDelay			(10)	//单位:0.1S
 
 //总压过压保护
-#define ParaProtect_TotalVolOver			(840)	//单位:0.1V
-#define ParaProtect_TotalVolOverFree		(820)	//单位:0.1V
+#define ParaProtect_TotalVolOver			(8400)	//单位:0.01V
+#define ParaProtect_TotalVolOverFree		(8200)	//单位:0.01V
 #define ParaProtect_TotalVolOverDelay		(10)	//单位:0.1S
 
 //总压欠压告警
-#define ParaAlarm_TotalVolUnder				(600)	//单位:0.1V
-#define ParaAlarm_TotalVolUnderFree			(630)	//单位:0.1V
+#define ParaAlarm_TotalVolUnder				(6000)	//单位:0.01V
+#define ParaAlarm_TotalVolUnderFree			(6300)	//单位:0.01V
 #define ParaAlarm_TotalVolUnderDelay		(10)	//单位:0.1S
 
 //总压欠压保护
-#define ParaProtect_TotalVolUnder			(560)	//单位:0.1V
-#define ParaProtect_TotalVolUnderFree		(630)	//单位:0.1V
+#define ParaProtect_TotalVolUnder			(5600)	//单位:0.01V
+#define ParaProtect_TotalVolUnderFree		(6300)	//单位:0.01V
 #define ParaProtect_TotalVolUnderDelay		(10)	//单位:0.1S
 
 //单体过压告警
@@ -117,29 +125,29 @@
 #define ParaProtect_MOSTempOverDelay		(10)	//单位:0.1S
 
 //充电过流告警
-#define ParaAlarm_ChgCurOver				(270)	//单位:0.1A
-#define ParaAlarm_ChgCurOverFree			(260)	//单位:0.1A
+#define ParaAlarm_ChgCurOver				(2700)	//单位:0.01A
+#define ParaAlarm_ChgCurOverFree			(2600)	//单位:0.01A
 #define ParaAlarm_ChgCurOverDelay			(10)	//单位:0.1S
 
 //充电过流保护
-#define ParaProtect_ChgCurOver				(280)	//单位:0.1A
+#define ParaProtect_ChgCurOver				(2800)	//单位:0.01A
 #define ParaProtect_ChgCurOverDelay			(20)	//单位:0.1S
 #define ParaProtect_ChgCurOverDelayFree		(50)	//单位:0.1S
 
 //放电过流告警
-#define ParaAlarm_DchgCurL1Over				(520)	//单位:0.1A
-#define ParaAlarm_DchgCurL1OverFree			(510)	//单位:0.1A
+#define ParaAlarm_DchgCurL1Over				(5200)	//单位:0.01A
+#define ParaAlarm_DchgCurL1OverFree			(5100)	//单位:0.01A
 #define ParaAlarm_DchgCurL1OverDelay		(10)	//单位:0.1S
 
 //放电过流一级保护
-#define ParaProtect_DchgCurL1Over			(530)	//单位:0.1A
+#define ParaProtect_DchgCurL1Over			(5300)	//单位:0.01A
 #define ParaProtect_DchgCurL1OverDelay		(20)	//单位:0.1S
 #define ParaProtect_DchgCurL1OverDelayFree	(50)	//单位:0.1S
 
 //放电过流二级保护
-#define ParaProtect_DchgCurL2Over			(750)	//单位:0.1A
+#define ParaProtect_DchgCurL2Over			(7500)	//单位:0.01A
 #define ParaProtect_DchgCurL2OverDelay		(10)	//单位:0.1S
-#define ParaProtect_DchgCurL2OverDelayFree	(120)	//单位:1S
+#define ParaProtect_DchgCurL2OverDelayFree	(1200)	//单位:0.1S
 
 //短路保护
 #define ParaProtect_ShortCircuit			(400)	//单位:1A

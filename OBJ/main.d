@@ -40,3 +40,6 @@
 ..\obj\main.o: ..\UCOSIII\UCOS_BSP\bsp.h
 ..\obj\main.o: ..\SYSTEM\SEGGER_RTT\RTT\SEGGER_RTT.h
 ..\obj\main.o: ..\SYSTEM\SEGGER_RTT\RTT\SEGGER_RTT_Conf.h
+..\obj\main.o: ..\BMS\BMS_FaultDiagnose.h
+..\obj\main.o: ..\BMS\BMS_GlobalVariable.h
+..\obj\main.o: ..\BMS\BMS_Parameter.h

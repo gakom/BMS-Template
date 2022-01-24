@@ -37,3 +37,5 @@
 ..\obj\bms_faultdiagnose.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_tim.h
 ..\obj\bms_faultdiagnose.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\bms_faultdiagnose.o: ..\FWLIB\STM32F10x_FWLib\inc\misc.h
+..\obj\bms_faultdiagnose.o: ..\BMS\BMS_GlobalVariable.h
+..\obj\bms_faultdiagnose.o: ..\BMS\BMS_Parameter.h

@@ -4,14 +4,18 @@
 
 #include "includes.h"
 
+#include "BMS_Parameter.h"
 
 
 
-#define BMS_Cell_Numer 20
-#define BMS_Temp_Numer 5
 
-
-
+typedef enum
+{
+	SystemState_Sleep,
+	SystemState_Normal,
+	SystemState_Chging,
+	SystemState_Dchging,
+}enumSystemState;
 
 
 
@@ -26,8 +30,9 @@ typedef struct
 	uint16_t TotalVol;					//总电压 单位:0.01V
 	uint16_t AverageVol;				//平均电压 单位:0.001V
 	uint16_t CellVol[BMS_Cell_Numer];	//单体电压 单位:0.001V
-	uint16_t MaxSingleVol;				//最大单体电压 单位:0.001V
-	uint16_t MinSingleVol;				//最小单体电压 单位:0.001V
+	uint16_t MaxCellVol;				//最大单体电压 单位:0.001V
+	uint16_t MinCellVol;				//最小单体电压 单位:0.001V
+	uint16_t DiffVol;					//压差 单位:0.001V
 
 	uint8_t CellTempNum;				//电池温度数量
 
@@ -44,68 +49,10 @@ typedef struct
 	uint8_t SOC;						//荷电荷状态 单位:1% 范围:0%~100%
 	uint8_t SOH;						//电池健康状态 单位:1% 范围:0%~100%
 
-
+	enumSystemState SystemState;		//系统状态
 
 }tBMSInfo;
-
-
-
-//故障保护标记
-typedef struct
-{
-	uint8_t TotalVol_Over:1;		//总压过压
-	uint8_t TotalVol_Under:1;		//总压欠压
-
-	uint8_t CellVol_Over:1;			//单体过压
-	uint8_t CellVol_Under:1;		//单体欠压
-
-	uint8_t ChgTemp_Over:1;			//充电过温
-	uint8_t ChgTemp_Under:1;		//充电欠温
-
-	uint8_t DchgTemp_Over:1;		//放电过温
-	uint8_t DchgTemp_Under:1;		//放电欠温
-
-	uint8_t EnvirTemp_Over:1;		//环境过温
-	uint8_t EnvirTemp_Under:1;		//环境欠温
-
-	uint8_t MOSTemp_Over:1;			//功率(MOS)过温
-
-	uint8_t ChgCur_Over:1;			//充电过流
-
-	uint8_t DchgCur_L1_Over:1;		//放电过流一级
-
-	uint8_t DchgCur_L2_Over:1;		//放电过流二级
-
-	uint8_t DiffVol_Over:1;			//压差过大
-}tProtectFlag;
-
-//故障告警标记
-typedef struct
-{
-	uint8_t TotalVol_Over:1;		//总压过压
-	uint8_t TotalVol_Under:1;		//总压欠压
-
-	uint8_t CellVol_Over:1;			//单体过压
-	uint8_t CellVol_Under:1;		//单体欠压
-
-	uint8_t ChgTemp_Over:1;			//充电过温
-	uint8_t ChgTemp_Under:1;		//充电欠温
-
-	uint8_t DchgTemp_Over:1;		//放电过温
-	uint8_t DchgTemp_Under:1;		//放电欠温
-
-	uint8_t EnvirTemp_Over:1;		//环境过温
-	uint8_t EnvirTemp_Under:1;		//环境欠温
-
-	uint8_t MOSTempOver:1;			//功率(MOS)过温
-
-	uint8_t ChgCurOver:1;			//充电过流
-
-	uint8_t DchgCur_Over:1;			//放电过流
-
-	uint8_t DiffVol_Over:1;			//压差过大
-}tAlarmFlag;
-
+extern tBMSInfo BMSInfo;
 
 
 
