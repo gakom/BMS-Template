@@ -4,7 +4,7 @@
 #include "SEGGER_RTT.h"
 
 
-//#define SEGGER_RTT_printf(BufferIndex,sFormat, ...)
+#define Degub_Printf(BufferIndex,sFormat, ...)  SEGGER_RTT_printf(BufferIndex,sFormat, ...)
 
 /*
 ****************************************************************************************
@@ -126,6 +126,8 @@ void Task_Test_1_task(void *p_arg)
 
 	while(1)
 	{
+		Degub_Printf(0, "Task_Test_1_task\n");
+		
 		//SEGGER_RTT_printf(0, "Task_Test_1_task\n");
 		OSTimeDlyHMSM(0,0,0,5,OS_OPT_TIME_HMSM_STRICT,&err);
 	}
@@ -183,30 +185,30 @@ void Check_Stack_Cup_task(void *p_arg)
 	{
 		OSTimeDlyHMSM(0,0,5,0,OS_OPT_TIME_HMSM_STRICT,&err);
 
-		SEGGER_RTT_printf(0, "\n");
+		// SEGGER_RTT_printf(0, "\n");
 
-		SEGGER_RTT_printf(0, "Task_Test_1_task --- StkUsed: %d  StkFree: %d  CPUUsage: %d  CPUUsageMax: %d\n" ,
-			Task_Test_1_task_TCB.StkUsed,
-			Task_Test_1_task_TCB.StkFree,
-			Task_Test_1_task_TCB.CPUUsage,
-			Task_Test_1_task_TCB.CPUUsageMax
-			);
+		// SEGGER_RTT_printf(0, "Task_Test_1_task --- StkUsed: %d  StkFree: %d  CPUUsage: %d  CPUUsageMax: %d\n" ,
+		// 	Task_Test_1_task_TCB.StkUsed,
+		// 	Task_Test_1_task_TCB.StkFree,
+		// 	Task_Test_1_task_TCB.CPUUsage,
+		// 	Task_Test_1_task_TCB.CPUUsageMax
+		// 	);
 
-		SEGGER_RTT_printf(0, "Task_Test_2_task --- StkUsed: %d  StkFree: %d  CPUUsage: %d  CPUUsageMax: %d\n" ,
-			Task_Test_2_task_TCB.StkUsed,
-			Task_Test_2_task_TCB.StkFree,
-			Task_Test_2_task_TCB.CPUUsage,
-			Task_Test_2_task_TCB.CPUUsageMax
-			);
+		// SEGGER_RTT_printf(0, "Task_Test_2_task --- StkUsed: %d  StkFree: %d  CPUUsage: %d  CPUUsageMax: %d\n" ,
+		// 	Task_Test_2_task_TCB.StkUsed,
+		// 	Task_Test_2_task_TCB.StkFree,
+		// 	Task_Test_2_task_TCB.CPUUsage,
+		// 	Task_Test_2_task_TCB.CPUUsageMax
+		// 	);
 
-		SEGGER_RTT_printf(0, "Task_Test_3_task --- StkUsed: %d  StkFree: %d  CPUUsage: %d  CPUUsageMax: %d\n" ,
-			Task_Test_3_task_TCB.StkUsed,
-			Task_Test_3_task_TCB.StkFree,
-			Task_Test_3_task_TCB.CPUUsage,
-			Task_Test_3_task_TCB.CPUUsageMax
-			);
+		// SEGGER_RTT_printf(0, "Task_Test_3_task --- StkUsed: %d  StkFree: %d  CPUUsage: %d  CPUUsageMax: %d\n" ,
+		// 	Task_Test_3_task_TCB.StkUsed,
+		// 	Task_Test_3_task_TCB.StkFree,
+		// 	Task_Test_3_task_TCB.CPUUsage,
+		// 	Task_Test_3_task_TCB.CPUUsageMax
+		// 	);
 
-		SEGGER_RTT_printf(0, "\n");
+		// SEGGER_RTT_printf(0, "\n");
 	}
 }
 
