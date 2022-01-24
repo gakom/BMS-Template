@@ -2,13 +2,14 @@
 #define _BMS_GLOBALVARIABLE_H_
 
 
-
+#include "includes.h"
 
 
 
 
 #define BMS_Cell_Numer 20
 #define BMS_Temp_Numer 5
+
 
 
 

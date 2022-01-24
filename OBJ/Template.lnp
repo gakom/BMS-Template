@@ -42,6 +42,9 @@
 "..\obj\os_cpu_a.o"
 "..\obj\os_cpu_c.o"
 "..\obj\os_app_hooks.o"
+"..\obj\bms_globalvariable.o"
+"..\obj\bms_parameter.o"
+"..\obj\bms_faultdiagnose.o"
 --strict --scatter "..\OBJ\Template.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

@@ -4,7 +4,7 @@
 #include "SEGGER_RTT.h"
 
 
-#define Degub_Printf(BufferIndex,sFormat, ...)  SEGGER_RTT_printf(BufferIndex,sFormat, ...)
+//#define Degub_Printf(BufferIndex,sFormat, ...)  SEGGER_RTT_printf(BufferIndex,sFormat, ...)
 
 /*
 ****************************************************************************************
@@ -126,8 +126,8 @@ void Task_Test_1_task(void *p_arg)
 
 	while(1)
 	{
-		Degub_Printf(0, "Task_Test_1_task\n");
-		
+
+	
 		//SEGGER_RTT_printf(0, "Task_Test_1_task\n");
 		OSTimeDlyHMSM(0,0,0,5,OS_OPT_TIME_HMSM_STRICT,&err);
 	}

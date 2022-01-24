@@ -2,7 +2,7 @@
 #define _BMS_PARAMETER_H_
 
 
-
+#include "includes.h"
 
 
 //总压过压告警

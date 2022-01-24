@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\USER;..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\STM32F10x_FWLib\inc;..\FWLIB\STM32F10x_FWLib\inc;..\HARDWARE\LED;..\UCOSIII\uC-CPU;..\UCOSIII\uC-LIB;..\UCOSIII\uCOS-III;..\UCOSIII\UCOS_BSP;..\UCOSIII\uCOS_CONFIG;..\UCOSIII\uCOS-III\Source;..\UCOSIII\uC-CPU\ARM-Cortex-M3\RealView;..\UCOSIII\uC-LIB\Ports\ARM-Cortex-M3\RealView;..\UCOSIII\uCOS-III\Ports\ARM-Cortex-M3\Generic\RealView;..\SYSTEM\SEGGER_RTT\RTT</IncludePath>
+              <IncludePath>..\USER;..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\STM32F10x_FWLib\inc;..\FWLIB\STM32F10x_FWLib\inc;..\HARDWARE\LED;..\UCOSIII\uC-CPU;..\UCOSIII\uC-LIB;..\UCOSIII\uCOS-III;..\UCOSIII\UCOS_BSP;..\UCOSIII\uCOS_CONFIG;..\UCOSIII\uCOS-III\Source;..\UCOSIII\uC-CPU\ARM-Cortex-M3\RealView;..\UCOSIII\uC-LIB\Ports\ARM-Cortex-M3\RealView;..\UCOSIII\uCOS-III\Ports\ARM-Cortex-M3\Generic\RealView;..\SYSTEM\SEGGER_RTT\RTT;..\BMS</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -399,9 +399,6 @@
               <FilePath>.\system_stm32f10x.c</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>HARDWARE</GroupName>
         </Group>
         <Group>
           <GroupName>SYSTEM</GroupName>
@@ -685,6 +682,26 @@
               <FileName>os_cfg_app.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\UCOSIII\uCOS_CONFIG\os_cfg_app.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BMS</GroupName>
+          <Files>
+            <File>
+              <FileName>BMS_GlobalVariable.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BMS\BMS_GlobalVariable.c</FilePath>
+            </File>
+            <File>
+              <FileName>BMS_Parameter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BMS\BMS_Parameter.c</FilePath>
+            </File>
+            <File>
+              <FileName>BMS_FaultDiagnose.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BMS\BMS_FaultDiagnose.c</FilePath>
             </File>
           </Files>
         </Group>
