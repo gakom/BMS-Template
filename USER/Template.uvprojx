@@ -703,6 +703,16 @@
               <FileType>1</FileType>
               <FilePath>..\BMS\BMS_FaultDiagnose.c</FilePath>
             </File>
+            <File>
+              <FileName>BMS_SystemStateSwitching.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BMS\BMS_SystemStateSwitching.c</FilePath>
+            </File>
+            <File>
+              <FileName>BMS_Record.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BMS\BMS_Record.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

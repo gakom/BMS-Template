@@ -164,7 +164,10 @@
 #define ParaProtect_DiffVolOverFree			(500)	//单位:1mv
 #define ParaProtect_DiffVolOverDelay		(10)	//单位:0.1S
 
-
+//电芯失效
+#define ParaFault_CellInvalid_H				(5000)	//单位:1mv
+#define ParaFault_CellInvalid_L				(1800)	//单位:1mv
+#define ParaFault_CellInvalidDelay			(300)	//单位:0.1S
 
 #endif
 

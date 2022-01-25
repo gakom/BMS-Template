@@ -11,12 +11,37 @@
 
 typedef enum
 {
-	SystemState_Sleep,
-	SystemState_Normal,
-	SystemState_Chging,
-	SystemState_Dchging,
+	SystemState_Check,			//自检
+	SystemState_Normal,			//待机
+	SystemState_Chging,			//充电
+	SystemState_Dchging,		//放电
+	SystemState_LightSleep,		//浅休眠
+	SystemState_DeepSleep,		//深度休眠
+	SystemState_Lock,			//闭锁，不可恢复，需要重新上电才能恢复
 }enumSystemState;
 
+
+//功能开关
+typedef struct
+{
+	uint8_t DeepSleep:1;
+	uint8_t LightSleep:1;
+	uint8_t Fire:1;
+	uint8_t Heat:1;
+	uint8_t BlueTooth:1;
+	uint8_t _4G:1;
+	uint8_t Balance:1;
+}tFunSwitch;
+
+
+//开关量状态
+typedef struct
+{
+	uint8_t PreChg:1;
+	uint8_t ChgMos:1;
+	uint8_t	DchgMos:1;
+	uint8_t Heat:1;
+}tSwitchState;
 
 
 //保护板实时信息
@@ -49,7 +74,14 @@ typedef struct
 	uint8_t SOC;						//荷电荷状态 单位:1% 范围:0%~100%
 	uint8_t SOH;						//电池健康状态 单位:1% 范围:0%~100%
 
+	uint64_t LeftCap;					//剩余容量 单位:1mAs  1Ah = 1000 * 3600 mAs
+	uint64_t RatedCap;					//额定容量 单位:1mAs
+	uint64_t FullCap;					//最大可用容量-单次欠压到过压充满的容量 单位:1mAs
+
+
 	enumSystemState SystemState;		//系统状态
+	tFunSwitch		FuncSwitch;			//功能开关位
+	tSwitchState	SwitchState;		//
 
 }tBMSInfo;
 extern tBMSInfo BMSInfo;

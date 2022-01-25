@@ -47,6 +47,8 @@ tDiagnoseData ProtectDiffVol_Over;		//压差过大保护
 
 
 
+tDiagOutOfRange FaultCellInvalid_Out;	//电芯失效
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //Function:判断是否大于阈值
@@ -129,6 +131,45 @@ void IsUnderFaultDiagnosePro(tDiagnoseData *DiagData,int16_t Value)
 }
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+//Function:判断是否在范围外
+//
+/////////////////////////////////////////////////////////////////////////////////////////////
+void IsOutFaultDiagnosePro(tDiagOutOfRange *DiagData,int16_t ValueL,int16_t ValueH)
+{
+	if(DiagData->Flag == 0)//如果没有故障
+	{
+		if(ValueL < DiagData->TriggerL || ValueH > DiagData->TriggerH)
+		{
+			DiagData->Cnt += 1;
+			if(DiagData->Cnt > DiagData->Triggertime)//如果时间大于触发延时
+			{
+				DiagData->Flag  = 1;//置故障标记
+				DiagData->Cnt = 0;//时间清0
+			}
+		}
+		else
+		{
+			DiagData->Cnt = 0;//时间清0
+		}
+	}
+	else
+	{
+		if(ValueL >= DiagData->TriggerL || ValueH <= DiagData->TriggerH)
+		{
+			DiagData->Cnt += 1;
+			if(DiagData->Cnt > DiagData->Recoverytime)//如果时间大于触发延时
+			{
+				DiagData->Flag  = 0;//置故障标记
+				DiagData->Cnt = 0;//时间清0
+			}
+		}
+		else
+		{
+			DiagData->Cnt = 0;//时间清0
+		}
+	}
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //Function:故障诊断
@@ -250,6 +291,10 @@ void FaultDiagnosePro(void)
 		ProtectDchgCur_L1_Over.Flag = 0;
 		ProtectDchgCur_L2_Over.Flag = 0;
 	}
+
+	//电芯失效
+	IsOutFaultDiagnosePro(&FaultCellInvalid_Out,BMSInfo.MinCellVol,BMSInfo.MaxCellVol);
+
 }
 
 
@@ -491,6 +536,14 @@ void ResetFaultDiagDefaultPara(void)
 	ProtectDiffVol_Over.Cnt 			= 0;
 	ProtectDiffVol_Over.Triggertime 	= ParaProtect_DiffVolOverDelay;
 	ProtectDiffVol_Over.Recoverytime 	= ParaProtect_DiffVolOverDelay;
+
+	//电芯失效
+	FaultCellInvalid_Out.Flag 			= 0;
+	FaultCellInvalid_Out.TriggerH 		= ParaFault_CellInvalid_H;
+	FaultCellInvalid_Out.TriggerL 		= ParaFault_CellInvalid_L;
+	FaultCellInvalid_Out.Cnt 			= 0;
+	FaultCellInvalid_Out.Triggertime 	= ParaFault_CellInvalidDelay;
+	FaultCellInvalid_Out.Recoverytime 	= ParaFault_CellInvalidDelay;
 
 }
 

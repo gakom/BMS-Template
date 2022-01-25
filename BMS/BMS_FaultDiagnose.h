@@ -19,7 +19,6 @@ typedef struct
 }tDiagnoseData;
 
 
-
 extern tDiagnoseData AlarmTotalVol_Over;		//总压过压告警
 extern tDiagnoseData ProtectTotalVol_Over;		//总压过压保护
 
@@ -62,6 +61,22 @@ extern tDiagnoseData ProtectDchgCur_L2_Over;	//放电过流二级保护
 
 extern tDiagnoseData AlarmDiffVol_Over;			//压差过大告警
 extern tDiagnoseData ProtectDiffVol_Over;		//压差过大保护
+
+
+
+
+
+typedef struct 
+{
+	uint8_t	 Flag;			//故障标记	1:有故障		0:没有故障
+	int16_t  TriggerH;		//上限阈值
+	int16_t  TriggerL;		//下限阈值
+	uint16_t Cnt;			//持续时间
+	uint16_t Triggertime;	//触发延时时间
+	uint16_t Recoverytime;	//恢复延时时间
+}tDiagOutOfRange;
+
+extern tDiagOutOfRange FaultCellInvalid_Out;	//电芯失效
 
 
 
