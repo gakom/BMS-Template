@@ -9,15 +9,12 @@ void UpdateVoltagePro(void)
 	uint8_t maxnum = 0;
 	uint8_t i;
 
-	uint16_t mincellvol;
-	uint16_t maxcellvol;
+	
+	uint16_t mincellvol = 0xffff;
+	uint16_t maxcellvol = 0;
+	uint32_t totalvol = 0;
 
 	//get vlotage
-
-
-
-	mincellvol = 0xffff;
-	maxcellvol = 0;
 
 	for(i = 0; i < BMS_Cell_Numer ; i++)				//判断每一路温度
 	{
@@ -34,10 +31,17 @@ void UpdateVoltagePro(void)
 		}
 	}
 
+	for(i = 0; i < BMS_Cell_Numer ; i++)
+	{
+		totalvol += BMSInfo.CellVol[i];
+	}
+
 	BMSInfo.MinCellVol 		= mincellvol;
 	BMSInfo.MinCellVolNum 	= minnum;
 	BMSInfo.MaxCellVol		= maxcellvol;
 	BMSInfo.MaxCellVolNum 	= maxnum;
+	BMSInfo.TotalVol 		= totalvol / 10;
+	BMSInfo.AverageVol 		= totalvol / BMS_Cell_Numer;
 
 }
 

@@ -11,9 +11,8 @@ void UpdateTemperaturePro(void)
 	uint8_t maxnum = 0;
 	uint8_t i;
 
-	int16_t mincelltemp;
-	int16_t maxcelltemp;
-
+	int16_t mincelltemp = 120;
+	int16_t maxcelltemp = -40;
 	int16_t bmscelltemp[PCB_Temp_Numer];
 
 	//get cell temperature
@@ -30,10 +29,6 @@ void UpdateTemperaturePro(void)
 				BMSInfo.CellTemp[index++] = bmscelltemp[i];
 		}
 	}
-
-	mincelltemp = 121;
-	maxcelltemp = -41;
-
 
 	for(i = 0; i < BMS_Temp_Numer ; i++)					//判断每一路温度
 	{
