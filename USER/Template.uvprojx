@@ -713,6 +713,16 @@
               <FileType>1</FileType>
               <FilePath>..\BMS\BMS_Record.c</FilePath>
             </File>
+            <File>
+              <FileName>BMS_Temperature.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BMS\BMS_Temperature.c</FilePath>
+            </File>
+            <File>
+              <FileName>BMS_Voltage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BMS\BMS_Voltage.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

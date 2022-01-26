@@ -11,8 +11,10 @@
 
 typedef enum
 {
+	SystemState_Null,			//MCU刚上电状态
 	SystemState_Check,			//自检
 	SystemState_Normal,			//待机
+	SystemState_Prechg,			//预充状态
 	SystemState_Chging,			//充电
 	SystemState_Dchging,		//放电
 	SystemState_LightSleep,		//浅休眠
@@ -24,13 +26,14 @@ typedef enum
 //功能开关
 typedef struct
 {
-	uint8_t DeepSleep:1;
-	uint8_t LightSleep:1;
-	uint8_t Fire:1;
-	uint8_t Heat:1;
-	uint8_t BlueTooth:1;
-	uint8_t _4G:1;
-	uint8_t Balance:1;
+	uint8_t DeepSleep:1;		//深度休眠
+	uint8_t LightSleep:1;		//浅休眠
+	uint8_t Fire:1;				//防打火
+	uint8_t Heat:1;				//加热
+	uint8_t BlueTooth:1;		//蓝牙
+	uint8_t _4G:1;				//4G
+	uint8_t Balance:1;			//均衡
+	uint8_t Temperature;		//温度开关 对应开关了哪几路温度  bit0:第一路 bit1:第二路 ...以此类推
 }tFunSwitch;
 
 
@@ -73,15 +76,22 @@ typedef struct
 
 	uint8_t SOC;						//荷电荷状态 单位:1% 范围:0%~100%
 	uint8_t SOH;						//电池健康状态 单位:1% 范围:0%~100%
+	uint8_t ChgDepth;					//充电深度
+	uint8_t DchgDepth;					//放电深度
+	uint16_t ChgCount;					//充电次数
+	uint16_t DchgCount;					//放电次数
 
 	uint64_t LeftCap;					//剩余容量 单位:1mAs  1Ah = 1000 * 3600 mAs
 	uint64_t RatedCap;					//额定容量 单位:1mAs
 	uint64_t FullCap;					//最大可用容量-单次欠压到过压充满的容量 单位:1mAs
 
 
+	uint32_t RunDistance;				//行驶里程 单位:1km
+
+
 	enumSystemState SystemState;		//系统状态
 	tFunSwitch		FuncSwitch;			//功能开关位
-	tSwitchState	SwitchState;		//
+	tSwitchState	SwitchState;		//开关量状态
 
 }tBMSInfo;
 extern tBMSInfo BMSInfo;

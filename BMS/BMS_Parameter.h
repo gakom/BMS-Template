@@ -7,10 +7,13 @@
 
 
 //电池信息
-#define BMS_Cell_Numer 20
-#define BMS_Temp_Numer 5
+#define BMS_Cell_Numer 20	//实际使用电池数量
+#define BMS_Temp_Numer 5	//实际使用温度数量
 
 
+
+#define PCB_Cell_Numer 20	//PCB上面的可使用电池数量
+#define PCB_Temp_Numer 5	//PCB上面的可使用温度数量
 
 
 

@@ -7,5 +7,10 @@
 #include "BMS_Parameter.h"
 #include "BMS_FaultDiagnose.h"
 
+
+
+extern void SystemStateSwitchingPro(void);
+
+
 #endif
 

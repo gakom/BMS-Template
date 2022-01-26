@@ -5,43 +5,14 @@
 #include "includes.h"
 
 #include "BMS_FaultDiagnose.h"
+#include "BMS_GlobalVariable.h"
 
 
 
-#define MaxRecordNumber
+#define MaxRecordNumber (1000)
 
 
 
-
-/*
-历史记录存储的数据
-
-
-时间戳			uint64_t
-总电压			uint16_t		0.01V
-总电流			int16_t			0.01A
-剩余容量			uint32_t		0.01Ah
-额定容量			uint32_t		0.01Ah
-最大可用容量		uint32_t		0.01Ah
-SOC				uint8_t
-SOH				uint8_t
-最高电压			uint16_t		0.001V
-最低电压			uint16_t		0.001V
-压差				uint16_t		0.001V
-充电次数			uint16_t
-放电次数			uint16_t
-充电深度			uint8_t
-放电深度			uint8_t
-运行里程			uint32_t		1km
-电池温度 1~5		int16_t*5		1'C
-环境温度			int16_t			1'C
-MOS温度			int16_t			1'C
-电池电压 1~20	uint16_t*20		0.001V
-
-
-
-
-*/
 
 
 typedef enum
@@ -146,22 +117,39 @@ typedef enum
 
 
 
-
-
-
-
-
-
 typedef struct
 {
-	uint64_t Timestamp;			//时间戳
-	uint16_t TotalVol;			//总电压 单位:0.01V
-	int16_t  Current;			//总电流 单位:0.01A(充电为正、放电为负)
+	uint64_t Timestamp;					//时间戳
+	uint16_t TotalVol;					//总电压 单位:0.01V
+	int16_t  Current;					//总电流 单位:0.01A(充电为正、放电为负)
 
-	//add record
+	uint16_t LeftCap;					//剩余容量 单位:0.01AH
+	uint16_t RatedCap;					//额定容量 单位:0.01AH
+	uint16_t FullCap;					//最大可用容量-单次欠压到过压充满的容量 单位:0.01AH
+
+	uint8_t SOC;						//荷电荷状态 单位:1% 范围:0%~100%
+	uint8_t SOH;						//电池健康状态 单位:1% 范围:0%~100%
+	uint8_t ChgDepth;					//充电深度
+	uint8_t DchgDepth;					//放电深度
+	uint16_t ChgCount;					//充电次数
+	uint16_t DchgCount;					//放电次数
+
+	uint16_t MaxCellVol;				//最大单体电压 单位:0.001V
+	uint16_t MinCellVol;				//最小单体电压 单位:0.001V
+	uint16_t CellVol[BMS_Cell_Numer];	//单体电压 单位:0.001V
+	uint16_t DiffVol;					//压差 单位:0.001V
 
 
-	enumRecordType Type;		//记录类型
+	uint32_t RunDistance;				//行驶里程 单位:1km
+
+	int16_t EnvirTmep;					//环境温度 单位:0.1摄氏度
+	int16_t MOSTmep;  					//MOS温度 单位:0.1摄氏度
+	int16_t MaxCellTemp;				//最大电池温度 单位:0.1摄氏度
+	int16_t MinCellTemp;				//最小电池温度 单位:0.1摄氏度
+	int16_t CellTemp[BMS_Temp_Numer];	//电池温度 单位:0.1摄氏度
+
+
+	enumRecordType Type;				//记录类型
 
 }tRecord;
 
@@ -170,14 +158,17 @@ typedef struct
 typedef struct
 {
 	uint16_t TotalRecordNum;	//已存储了多少条记录
+	uint16_t FristRecordAddr;	//第一条记录的位置
+	uint16_t LastRecordAddr;	//最后一条记录的位置
 	uint16_t Index;				//当前索引
-
-
 }tRecordInfo;
 
+extern tRecordInfo AlarmRecordInfo;
+extern tRecordInfo RunRecordInfo;
 
 
 
+extern void WriteRecordForRun(void);
 
 
 #endif

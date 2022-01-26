@@ -1,22 +1,84 @@
 #include "BMS_Record.h"
 
 
+tRecordInfo AlarmRecordInfo;
+tRecordInfo RunRecordInfo;
 
 
-
-
-
-
-
-
-
-void WriteOneRecord(enumRecordType type)
+//0:Alarm  1:Run
+void WriteOneRecord(enumRecordType type,uint8_t recordtype)
 {
+
+	tRecordInfo *RecordInfo;
+
+	RecordInfo = recordtype == 0 ? &AlarmRecordInfo : &RunRecordInfo;
+
+	if(RecordInfo->TotalRecordNum < MaxRecordNumber)//还没有存满，第一条地址都在1，最后一条地址+1
+	{
+		RecordInfo->TotalRecordNum++;
+		RecordInfo->FristRecordAddr = 1;
+		RecordInfo->LastRecordAddr = RecordInfo->TotalRecordNum;
+	}
+	else//存满了之后，每次存储第一条和最后一条地址都+1
+	{
+		if(++RecordInfo->FristRecordAddr > MaxRecordNumber)
+			RecordInfo->FristRecordAddr = 1;
+
+		if(++RecordInfo->LastRecordAddr > MaxRecordNumber)
+			RecordInfo->LastRecordAddr = 1;
+	}
+
+	//add to epprom  不同类型的记录，存储的地址不一样
+
+
+
+
 
 }
 
 
+void WriteOneRecordForAlarm(enumRecordType type)
+{
+	// if(AlarmRecordInfo.TotalRecordNum < MaxRecordNumber)//还没有存满，第一条地址都在1，最后一条地址+1
+	// {
+	// 	AlarmRecordInfo.TotalRecordNum++;
+	// 	AlarmRecordInfo.FristRecordAddr = 1;
+	// 	AlarmRecordInfo.LastRecordAddr = AlarmRecordInfo.TotalRecordNum;
+	// }
+	// else//存满了之后，每次存储第一条和最后一条地址都+1
+	// {
+	// 	if(++AlarmRecordInfo.FristRecordAddr > MaxRecordNumber)
+	// 		AlarmRecordInfo.FristRecordAddr = 1;
 
+	// 	if(++AlarmRecordInfo.LastRecordAddr > MaxRecordNumber)
+	// 		AlarmRecordInfo.LastRecordAddr = 1;
+	// }
+
+
+
+	WriteOneRecord(type,0);
+}
+
+
+void WriteOneRecordForRun(enumRecordType type)
+{
+	// if(RunRecordInfo.TotalRecordNum < MaxRecordNumber)//还没有存满，第一条地址都在1，最后一条地址+1
+	// {
+	// 	RunRecordInfo.TotalRecordNum++;
+	// 	RunRecordInfo.FristRecordAddr = 1;
+	// 	RunRecordInfo.LastRecordAddr = RunRecordInfo.TotalRecordNum;
+	// }
+	// else//存满了之后，每次存储第一条和最后一条地址都+1
+	// {
+	// 	if(++RunRecordInfo.FristRecordAddr > MaxRecordNumber)
+	// 		RunRecordInfo.FristRecordAddr = 1;
+
+	// 	if(++RunRecordInfo.LastRecordAddr > MaxRecordNumber)
+	// 		RunRecordInfo.LastRecordAddr = 1;
+	// }
+
+	WriteOneRecord(type,1);
+}
 
 void IsRecord_AlarmTotalVol_Over(void)
 {
@@ -25,7 +87,7 @@ void IsRecord_AlarmTotalVol_Over(void)
 	if(AlarmTotalVol_Over.Flag != falg)
 	{
 		falg = AlarmTotalVol_Over.Flag;
-		AlarmTotalVol_Over.Flag == 1 ? WriteOneRecord(RecordType_AlarmTotalVol_Over) : WriteOneRecord(RecordType_AlarmTotalVol_OverFree);
+		AlarmTotalVol_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_AlarmTotalVol_Over) : WriteOneRecordForAlarm(RecordType_AlarmTotalVol_OverFree);
 	}
 }
 
@@ -36,7 +98,7 @@ void IsRecord_ProtectTotalVol_Over(void)
 	if(ProtectTotalVol_Over.Flag != falg)
 	{
 		falg = ProtectTotalVol_Over.Flag;
-		ProtectTotalVol_Over.Flag == 1 ? WriteOneRecord(RecordType_ProtectTotalVol_Over) : WriteOneRecord(RecordType_ProtectTotalVol_OverFree);
+		ProtectTotalVol_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectTotalVol_Over) : WriteOneRecordForAlarm(RecordType_ProtectTotalVol_OverFree);
 	}
 }
 
@@ -47,7 +109,7 @@ void IsRecord_AlarmTotalVol_Under(void)
 	if(AlarmTotalVol_Under.Flag != falg)
 	{
 		falg = AlarmTotalVol_Under.Flag;
-		AlarmTotalVol_Under.Flag == 1 ? WriteOneRecord(RecordType_AlarmTotalVol_Under) : WriteOneRecord(RecordType_AlarmTotalVol_UnderFree);
+		AlarmTotalVol_Under.Flag == 1 ? WriteOneRecordForAlarm(RecordType_AlarmTotalVol_Under) : WriteOneRecordForAlarm(RecordType_AlarmTotalVol_UnderFree);
 	}
 }
 
@@ -58,7 +120,7 @@ void IsRecord_ProtectTotalVol_Under(void)
 	if(ProtectTotalVol_Under.Flag != falg)
 	{
 		falg = ProtectTotalVol_Under.Flag;
-		ProtectTotalVol_Under.Flag == 1 ? WriteOneRecord(RecordType_ProtectTotalVol_Under) : WriteOneRecord(RecordType_ProtectTotalVol_UnderFree);
+		ProtectTotalVol_Under.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectTotalVol_Under) : WriteOneRecordForAlarm(RecordType_ProtectTotalVol_UnderFree);
 	}
 }
 
@@ -69,7 +131,7 @@ void IsRecord_AlarmCellVol_Over(void)
 	if(AlarmCellVol_Over.Flag != falg)
 	{
 		falg = AlarmCellVol_Over.Flag;
-		AlarmCellVol_Over.Flag == 1 ? WriteOneRecord(RecordType_AlarmCellVol_Over) : WriteOneRecord(RecordType_AlarmCellVol_Over);
+		AlarmCellVol_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_AlarmCellVol_Over) : WriteOneRecordForAlarm(RecordType_AlarmCellVol_Over);
 	}
 }
 
@@ -80,7 +142,7 @@ void IsRecord_ProtectCellVol_Over(void)
 	if(ProtectCellVol_Over.Flag != falg)
 	{
 		falg = ProtectCellVol_Over.Flag;
-		ProtectCellVol_Over.Flag == 1 ? WriteOneRecord(RecordType_ProtectCellVol_Over) : WriteOneRecord(RecordType_ProtectCellVol_Over);
+		ProtectCellVol_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectCellVol_Over) : WriteOneRecordForAlarm(RecordType_ProtectCellVol_Over);
 	}
 }
 
@@ -91,7 +153,7 @@ void IsRecord_AlarmCellVol_Under(void)
 	if(AlarmCellVol_Under.Flag != falg)
 	{
 		falg = AlarmCellVol_Under.Flag;
-		AlarmCellVol_Under.Flag == 1 ? WriteOneRecord(RecordType_AlarmCellVol_Under) : WriteOneRecord(RecordType_AlarmCellVol_Under);
+		AlarmCellVol_Under.Flag == 1 ? WriteOneRecordForAlarm(RecordType_AlarmCellVol_Under) : WriteOneRecordForAlarm(RecordType_AlarmCellVol_Under);
 	}
 }
 
@@ -102,7 +164,7 @@ void IsRecord_ProtectCellVol_Under(void)
 	if(ProtectCellVol_Under.Flag != falg)
 	{
 		falg = ProtectCellVol_Under.Flag;
-		ProtectCellVol_Under.Flag == 1 ? WriteOneRecord(RecordType_ProtectCellVol_Under) : WriteOneRecord(RecordType_ProtectCellVol_Under);
+		ProtectCellVol_Under.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectCellVol_Under) : WriteOneRecordForAlarm(RecordType_ProtectCellVol_Under);
 	}
 }
 
@@ -113,7 +175,7 @@ void IsRecord_AlarmChgTemp_Over(void)
 	if(AlarmChgTemp_Over.Flag != falg)
 	{
 		falg = AlarmChgTemp_Over.Flag;
-		AlarmChgTemp_Over.Flag == 1 ? WriteOneRecord(RecordType_AlarmChgTemp_Over) : WriteOneRecord(RecordType_AlarmChgTemp_Over);
+		AlarmChgTemp_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_AlarmChgTemp_Over) : WriteOneRecordForAlarm(RecordType_AlarmChgTemp_Over);
 	}
 }
 
@@ -124,7 +186,7 @@ void IsRecord_ProtectChgTemp_Over(void)
 	if(ProtectChgTemp_Over.Flag != falg)
 	{
 		falg = ProtectChgTemp_Over.Flag;
-		ProtectChgTemp_Over.Flag == 1 ? WriteOneRecord(RecordType_ProtectChgTemp_Over) : WriteOneRecord(RecordType_ProtectChgTemp_Over);
+		ProtectChgTemp_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectChgTemp_Over) : WriteOneRecordForAlarm(RecordType_ProtectChgTemp_Over);
 	}
 }
 
@@ -135,7 +197,7 @@ void IsRecord_AlarmChgTemp_Under(void)
 	if(AlarmChgTemp_Under.Flag != falg)
 	{
 		falg = AlarmChgTemp_Under.Flag;
-		AlarmChgTemp_Under.Flag == 1 ? WriteOneRecord(RecordType_AlarmChgTemp_Under) : WriteOneRecord(RecordType_AlarmChgTemp_Under);
+		AlarmChgTemp_Under.Flag == 1 ? WriteOneRecordForAlarm(RecordType_AlarmChgTemp_Under) : WriteOneRecordForAlarm(RecordType_AlarmChgTemp_Under);
 	}
 }
 
@@ -146,7 +208,7 @@ void IsRecord_ProtectChgTemp_Under(void)
 	if(ProtectChgTemp_Under.Flag != falg)
 	{
 		falg = ProtectChgTemp_Under.Flag;
-		ProtectChgTemp_Under.Flag == 1 ? WriteOneRecord(RecordType_ProtectChgTemp_Under) : WriteOneRecord(RecordType_ProtectChgTemp_Under);
+		ProtectChgTemp_Under.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectChgTemp_Under) : WriteOneRecordForAlarm(RecordType_ProtectChgTemp_Under);
 	}
 }
 
@@ -157,7 +219,7 @@ void IsRecord_AlarmDchgTemp_Over(void)
 	if(AlarmDchgTemp_Over.Flag != falg)
 	{
 		falg = AlarmDchgTemp_Over.Flag;
-		AlarmDchgTemp_Over.Flag == 1 ? WriteOneRecord(RecordType_AlarmDchgTemp_Over) : WriteOneRecord(RecordType_AlarmDchgTemp_Over);
+		AlarmDchgTemp_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_AlarmDchgTemp_Over) : WriteOneRecordForAlarm(RecordType_AlarmDchgTemp_Over);
 	}
 }
 
@@ -168,7 +230,7 @@ void IsRecord_ProtectDchgTemp_Over(void)
 	if(ProtectDchgTemp_Over.Flag != falg)
 	{
 		falg = ProtectDchgTemp_Over.Flag;
-		ProtectDchgTemp_Over.Flag == 1 ? WriteOneRecord(RecordType_ProtectDchgTemp_Over) : WriteOneRecord(RecordType_ProtectDchgTemp_Over);
+		ProtectDchgTemp_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectDchgTemp_Over) : WriteOneRecordForAlarm(RecordType_ProtectDchgTemp_Over);
 	}
 }
 
@@ -179,7 +241,7 @@ void IsRecord_AlarmDchgTemp_Under(void)
 	if(AlarmDchgTemp_Under.Flag != falg)
 	{
 		falg = AlarmDchgTemp_Under.Flag;
-		AlarmDchgTemp_Under.Flag == 1 ? WriteOneRecord(RecordType_AlarmDchgTemp_Under) : WriteOneRecord(RecordType_AlarmDchgTemp_Under);
+		AlarmDchgTemp_Under.Flag == 1 ? WriteOneRecordForAlarm(RecordType_AlarmDchgTemp_Under) : WriteOneRecordForAlarm(RecordType_AlarmDchgTemp_Under);
 	}
 }
 
@@ -190,7 +252,7 @@ void IsRecord_ProtectDchgTemp_Under(void)
 	if(ProtectDchgTemp_Under.Flag != falg)
 	{
 		falg = ProtectDchgTemp_Under.Flag;
-		ProtectDchgTemp_Under.Flag == 1 ? WriteOneRecord(RecordType_ProtectDchgTemp_Under) : WriteOneRecord(RecordType_ProtectDchgTemp_Under);
+		ProtectDchgTemp_Under.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectDchgTemp_Under) : WriteOneRecordForAlarm(RecordType_ProtectDchgTemp_Under);
 	}
 }
 
@@ -201,7 +263,7 @@ void IsRecord_AlarmEnvirTemp_Over(void)
 	if(AlarmEnvirTemp_Over.Flag != falg)
 	{
 		falg = AlarmEnvirTemp_Over.Flag;
-		AlarmEnvirTemp_Over.Flag == 1 ? WriteOneRecord(RecordType_AlarmEnvirTemp_Over) : WriteOneRecord(RecordType_AlarmEnvirTemp_Over);
+		AlarmEnvirTemp_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_AlarmEnvirTemp_Over) : WriteOneRecordForAlarm(RecordType_AlarmEnvirTemp_Over);
 	}
 }
 
@@ -212,7 +274,7 @@ void IsRecord_ProtectEnvirTemp_Over(void)
 	if(ProtectEnvirTemp_Over.Flag != falg)
 	{
 		falg = ProtectEnvirTemp_Over.Flag;
-		ProtectEnvirTemp_Over.Flag == 1 ? WriteOneRecord(RecordType_ProtectEnvirTemp_Over) : WriteOneRecord(RecordType_ProtectEnvirTemp_Over);
+		ProtectEnvirTemp_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectEnvirTemp_Over) : WriteOneRecordForAlarm(RecordType_ProtectEnvirTemp_Over);
 	}
 }
 
@@ -223,7 +285,7 @@ void IsRecord_AlarmEnvirTemp_Under(void)
 	if(AlarmEnvirTemp_Under.Flag != falg)
 	{
 		falg = AlarmEnvirTemp_Under.Flag;
-		AlarmEnvirTemp_Under.Flag == 1 ? WriteOneRecord(RecordType_AlarmEnvirTemp_Under) : WriteOneRecord(RecordType_AlarmEnvirTemp_Under);
+		AlarmEnvirTemp_Under.Flag == 1 ? WriteOneRecordForAlarm(RecordType_AlarmEnvirTemp_Under) : WriteOneRecordForAlarm(RecordType_AlarmEnvirTemp_Under);
 	}
 }
 
@@ -234,7 +296,7 @@ void IsRecord_ProtectEnvirTemp_Under(void)
 	if(ProtectEnvirTemp_Under.Flag != falg)
 	{
 		falg = ProtectEnvirTemp_Under.Flag;
-		ProtectEnvirTemp_Under.Flag == 1 ? WriteOneRecord(RecordType_ProtectEnvirTemp_Under) : WriteOneRecord(RecordType_ProtectEnvirTemp_Under);
+		ProtectEnvirTemp_Under.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectEnvirTemp_Under) : WriteOneRecordForAlarm(RecordType_ProtectEnvirTemp_Under);
 	}
 }
 
@@ -245,7 +307,7 @@ void IsRecord_AlarmMOSTempOver(void)
 	if(AlarmMOSTempOver.Flag != falg)
 	{
 		falg = AlarmMOSTempOver.Flag;
-		AlarmMOSTempOver.Flag == 1 ? WriteOneRecord(RecordType_AlarmMOSTempOver) : WriteOneRecord(RecordType_AlarmMOSTempOver);
+		AlarmMOSTempOver.Flag == 1 ? WriteOneRecordForAlarm(RecordType_AlarmMOSTempOver) : WriteOneRecordForAlarm(RecordType_AlarmMOSTempOver);
 	}
 }
 
@@ -256,7 +318,7 @@ void IsRecord_ProtectMOSTemp_Over(void)
 	if(ProtectMOSTemp_Over.Flag != falg)
 	{
 		falg = ProtectMOSTemp_Over.Flag;
-		ProtectMOSTemp_Over.Flag == 1 ? WriteOneRecord(RecordType_ProtectMOSTemp_Over) : WriteOneRecord(RecordType_ProtectMOSTemp_Over);
+		ProtectMOSTemp_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectMOSTemp_Over) : WriteOneRecordForAlarm(RecordType_ProtectMOSTemp_Over);
 	}
 }
 
@@ -267,7 +329,7 @@ void IsRecord_AlarmChgCurOver(void)
 	if(AlarmChgCurOver.Flag != falg)
 	{
 		falg = AlarmChgCurOver.Flag;
-		AlarmChgCurOver.Flag == 1 ? WriteOneRecord(RecordType_AlarmChgCurOver) : WriteOneRecord(RecordType_AlarmChgCurOver);
+		AlarmChgCurOver.Flag == 1 ? WriteOneRecordForAlarm(RecordType_AlarmChgCurOver) : WriteOneRecordForAlarm(RecordType_AlarmChgCurOver);
 	}
 }
 
@@ -278,7 +340,7 @@ void IsRecord_ProtectChgCur_Over(void)
 	if(ProtectChgCur_Over.Flag != falg)
 	{
 		falg = ProtectChgCur_Over.Flag;
-		ProtectChgCur_Over.Flag == 1 ? WriteOneRecord(RecordType_ProtectChgCur_Over) : WriteOneRecord(RecordType_ProtectChgCur_Over);
+		ProtectChgCur_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectChgCur_Over) : WriteOneRecordForAlarm(RecordType_ProtectChgCur_Over);
 	}
 }
 
@@ -289,7 +351,7 @@ void IsRecord_AlarmDchgCur_Over(void)
 	if(AlarmDchgCur_Over.Flag != falg)
 	{
 		falg = AlarmDchgCur_Over.Flag;
-		AlarmDchgCur_Over.Flag == 1 ? WriteOneRecord(RecordType_AlarmDchgCur_Over) : WriteOneRecord(RecordType_AlarmDchgCur_Over);
+		AlarmDchgCur_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_AlarmDchgCur_Over) : WriteOneRecordForAlarm(RecordType_AlarmDchgCur_Over);
 	}
 }
 
@@ -300,7 +362,7 @@ void IsRecord_ProtectDchgCur_L1_Over(void)
 	if(ProtectDchgCur_L1_Over.Flag != falg)
 	{
 		falg = ProtectDchgCur_L1_Over.Flag;
-		ProtectDchgCur_L1_Over.Flag == 1 ? WriteOneRecord(RecordType_ProtectDchgCur_L1_Over) : WriteOneRecord(RecordType_ProtectDchgCur_L1_Over);
+		ProtectDchgCur_L1_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectDchgCur_L1_Over) : WriteOneRecordForAlarm(RecordType_ProtectDchgCur_L1_Over);
 	}
 }
 
@@ -311,7 +373,7 @@ void IsRecord_ProtectDchgCur_L2_Over(void)
 	if(ProtectDchgCur_L2_Over.Flag != falg)
 	{
 		falg = ProtectDchgCur_L2_Over.Flag;
-		ProtectDchgCur_L2_Over.Flag == 1 ? WriteOneRecord(RecordType_ProtectDchgCur_L2_Over) : WriteOneRecord(RecordType_ProtectDchgCur_L2_Over);
+		ProtectDchgCur_L2_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectDchgCur_L2_Over) : WriteOneRecordForAlarm(RecordType_ProtectDchgCur_L2_Over);
 	}
 }
 
@@ -322,7 +384,7 @@ void IsRecord_AlarmDiffVol_Over(void)
 	if(AlarmDiffVol_Over.Flag != falg)
 	{
 		falg = AlarmDiffVol_Over.Flag;
-		AlarmDiffVol_Over.Flag == 1 ? WriteOneRecord(RecordType_AlarmDiffVol_Over) : WriteOneRecord(RecordType_AlarmDiffVol_Over);
+		AlarmDiffVol_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_AlarmDiffVol_Over) : WriteOneRecordForAlarm(RecordType_AlarmDiffVol_Over);
 	}
 }
 
@@ -333,27 +395,83 @@ void IsRecord_ProtectDiffVol_Over(void)
 	if(ProtectDiffVol_Over.Flag != falg)
 	{
 		falg = ProtectDiffVol_Over.Flag;
-		ProtectDiffVol_Over.Flag == 1 ? WriteOneRecord(RecordType_ProtectDiffVol_Over) : WriteOneRecord(RecordType_ProtectDiffVol_Over);
+		ProtectDiffVol_Over.Flag == 1 ? WriteOneRecordForAlarm(RecordType_ProtectDiffVol_Over) : WriteOneRecordForAlarm(RecordType_ProtectDiffVol_Over);
 	}
+}
+
+
+void IsRecord_SystemStateChange(void)
+{
+	static enumSystemState LastState = SystemState_Null;
+
+	if(BMSInfo.SystemState != LastState)
+	{
+
+		if(BMSInfo.SystemState == SystemState_Chging && LastState != SystemState_Chging)
+			WriteOneRecordForRun(RecordType_StartChg);
+
+		if(BMSInfo.SystemState != SystemState_Chging && LastState == SystemState_Chging)
+			WriteOneRecordForRun(RecordType_FinshChg);
+
+
+		if(BMSInfo.SystemState == SystemState_Dchging && LastState != SystemState_Dchging)
+			WriteOneRecordForRun(RecordType_StartDchg);
+
+		if(BMSInfo.SystemState != SystemState_Dchging && LastState == SystemState_Dchging)
+			WriteOneRecordForRun(RecordType_FinshDchg);
+
+
+		LastState = BMSInfo.SystemState;
+	}
+}
+
+
+void IsRecord_Timing(void)
+{
+
+
 }
 
 
 void WriteRecordForAlarm(void)
 {
-
+	IsRecord_AlarmTotalVol_Over();
+	IsRecord_ProtectTotalVol_Over();
+	IsRecord_AlarmTotalVol_Under();
+	IsRecord_ProtectTotalVol_Under();
+	IsRecord_AlarmCellVol_Over();
+	IsRecord_ProtectCellVol_Over();
+	IsRecord_AlarmCellVol_Under();
+	IsRecord_ProtectCellVol_Under();
+	IsRecord_AlarmChgTemp_Over();
+	IsRecord_ProtectChgTemp_Over();
+	IsRecord_AlarmChgTemp_Under();
+	IsRecord_ProtectChgTemp_Under();
+	IsRecord_AlarmDchgTemp_Over();
+	IsRecord_ProtectDchgTemp_Over();
+	IsRecord_AlarmDchgTemp_Under();
+	IsRecord_ProtectDchgTemp_Under();
+	IsRecord_AlarmEnvirTemp_Over();
+	IsRecord_ProtectEnvirTemp_Over();
+	IsRecord_AlarmEnvirTemp_Under();
+	IsRecord_ProtectEnvirTemp_Under();
+	IsRecord_AlarmMOSTempOver();
+	IsRecord_ProtectMOSTemp_Over();
+	IsRecord_AlarmChgCurOver();
+	IsRecord_ProtectChgCur_Over();
+	IsRecord_AlarmDchgCur_Over();
+	IsRecord_ProtectDchgCur_L1_Over();
+	IsRecord_ProtectDchgCur_L2_Over();
+	IsRecord_AlarmDiffVol_Over();
+	IsRecord_ProtectDiffVol_Over();
 }
 
 
 
 void WriteRecordForRun(void)
 {
-	//判断是否需要存记录
-
-
-
-	//存记录
-
-
+	IsRecord_SystemStateChange();
+	IsRecord_Timing();
 }
 
 
@@ -361,7 +479,16 @@ void WriteRecordForRun(void)
 
 
 
+void ResetRecord(void)
+{
+	AlarmRecordInfo.TotalRecordNum 	= 0;
+	AlarmRecordInfo.FristRecordAddr = 0;
+	AlarmRecordInfo.LastRecordAddr 	= 0;
 
+	RunRecordInfo.TotalRecordNum 	= 0;
+	RunRecordInfo.FristRecordAddr 	= 0;
+	RunRecordInfo.LastRecordAddr 	= 0;
+}
 
 
 

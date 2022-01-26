@@ -56,7 +56,12 @@ void IsNormalToChging(void)
 	}
 }
 
-void IsNormalToDchging(void)
+void IsNormalToPrechg(void)
+{
+
+}
+
+void IsPrechgToDchging(void)
 {
 	static uint16_t count = 0;
 
@@ -119,11 +124,14 @@ void SystemStateSwitchingPro(void)
 			IsCheckToNormal();
 			break;
 		case SystemState_Normal:
+			IsNormalToPrechg();
 			IsNormalToChging();
-			IsNormalToDchging();
 			IsNormalToLightSleep();
 			IsNormalToDeepSleep();
 			IsNormalToLock();
+			break;
+		case SystemState_Prechg:
+			IsPrechgToDchging();
 			break;
 		case SystemState_Chging:
 			IsChgingToNormal();

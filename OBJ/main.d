@@ -43,3 +43,7 @@
 ..\obj\main.o: ..\BMS\BMS_FaultDiagnose.h
 ..\obj\main.o: ..\BMS\BMS_GlobalVariable.h
 ..\obj\main.o: ..\BMS\BMS_Parameter.h
+..\obj\main.o: ..\BMS\BMS_SystemStateSwitching.h
+..\obj\main.o: ..\BMS\BMS_Record.h
+..\obj\main.o: ..\BMS\BMS_Temperature.h
+..\obj\main.o: ..\BMS\BMS_Voltage.h

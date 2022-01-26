@@ -5,6 +5,10 @@
 
 
 #include "BMS_FaultDiagnose.h"
+#include "BMS_SystemStateSwitching.h"
+#include "BMS_Record.h"
+#include "BMS_Temperature.h"
+#include "BMS_Voltage.h"
 
 
 //#define Degub_Printf(BufferIndex,sFormat, ...)  SEGGER_RTT_printf(BufferIndex,sFormat, ...)
@@ -131,7 +135,12 @@ void Task_Test_1_task(void *p_arg)
 	{
 
 		FaultDiagnosePro();
-	
+		SystemStateSwitchingPro();
+		WriteRecordForRun();
+		UpdateTemperaturePro();
+		UpdateVoltagePro();
+
+		
 		//SEGGER_RTT_printf(0, "Task_Test_1_task\n");
 		OSTimeDlyHMSM(0,0,0,5,OS_OPT_TIME_HMSM_STRICT,&err);
 	}
