@@ -47,3 +47,4 @@
 ..\obj\main.o: ..\BMS\BMS_Record.h
 ..\obj\main.o: ..\BMS\BMS_Temperature.h
 ..\obj\main.o: ..\BMS\BMS_Voltage.h
+..\obj\main.o: ..\BMS\BMS_Balance.h

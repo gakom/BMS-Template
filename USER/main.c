@@ -9,7 +9,7 @@
 #include "BMS_Record.h"
 #include "BMS_Temperature.h"
 #include "BMS_Voltage.h"
-
+#include "BMS_Balance.h"
 
 //#define Degub_Printf(BufferIndex,sFormat, ...)  SEGGER_RTT_printf(BufferIndex,sFormat, ...)
 

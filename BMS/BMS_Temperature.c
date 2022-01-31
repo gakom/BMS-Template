@@ -25,12 +25,12 @@ void UpdateTemperaturePro(void)
 	{
 		if(BMSInfo.FuncSwitch.Temperature & 1 << i)			//如果PCB上当前编号的温感被使能
 		{
-			if(index < BMS_Temp_Numer)						//如果小于最大温感数量
+			if(index < BMSInfo.BMS_Temp_Numer)						//如果小于最大温感数量
 				BMSInfo.CellTemp[index++] = bmscelltemp[i];
 		}
 	}
 
-	for(i = 0; i < BMS_Temp_Numer ; i++)					//判断每一路温度
+	for(i = 0; i < BMSInfo.BMS_Temp_Numer ; i++)					//判断每一路温度
 	{
 		if(BMSInfo.CellTemp[i] < mincelltemp)				//如果更小
 		{
@@ -51,8 +51,10 @@ void UpdateTemperaturePro(void)
 	BMSInfo.MaxCellTempNum 	= maxnum;
 }
 
-
-
+void ResetTemperaturePara(void)
+{
+	BMSInfo.BMS_Temp_Numer = Default_BMS_Temp_Numer;
+}
 
 
 

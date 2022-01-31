@@ -136,7 +136,7 @@ typedef struct
 
 	uint16_t MaxCellVol;				//最大单体电压 单位:0.001V
 	uint16_t MinCellVol;				//最小单体电压 单位:0.001V
-	uint16_t CellVol[BMS_Cell_Numer];	//单体电压 单位:0.001V
+	uint16_t CellVol[PCB_Cell_Numer];	//单体电压 单位:0.001V
 	uint16_t DiffVol;					//压差 单位:0.001V
 
 
@@ -146,7 +146,7 @@ typedef struct
 	int16_t MOSTmep;  					//MOS温度 单位:0.1摄氏度
 	int16_t MaxCellTemp;				//最大电池温度 单位:0.1摄氏度
 	int16_t MinCellTemp;				//最小电池温度 单位:0.1摄氏度
-	int16_t CellTemp[BMS_Temp_Numer];	//电池温度 单位:0.1摄氏度
+	int16_t CellTemp[PCB_Temp_Numer];	//电池温度 单位:0.1摄氏度
 
 
 	enumRecordType Type;				//记录类型

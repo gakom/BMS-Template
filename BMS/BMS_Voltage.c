@@ -16,7 +16,7 @@ void UpdateVoltagePro(void)
 
 	//get vlotage
 
-	for(i = 0; i < BMS_Cell_Numer ; i++)				//判断每一路温度
+	for(i = 0; i < BMSInfo.BMS_Cell_Numer ; i++)			//判断每一路电池
 	{
 		if(BMSInfo.CellVol[i] < mincellvol)				//如果更小
 		{
@@ -31,7 +31,7 @@ void UpdateVoltagePro(void)
 		}
 	}
 
-	for(i = 0; i < BMS_Cell_Numer ; i++)
+	for(i = 0; i < BMSInfo.BMS_Cell_Numer ; i++)
 	{
 		totalvol += BMSInfo.CellVol[i];
 	}
@@ -41,13 +41,16 @@ void UpdateVoltagePro(void)
 	BMSInfo.MaxCellVol		= maxcellvol;
 	BMSInfo.MaxCellVolNum 	= maxnum;
 	BMSInfo.TotalVol 		= totalvol / 10;
-	BMSInfo.AverageVol 		= totalvol / BMS_Cell_Numer;
+	BMSInfo.AverageVol 		= totalvol / BMSInfo.BMS_Cell_Numer;
 
 }
 
 
 
 
-
+void ResetVoltagePara(void)
+{
+	BMSInfo.BMS_Cell_Numer = Default_BMS_Cell_Numer;
+}
 
 

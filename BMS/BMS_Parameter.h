@@ -7,8 +7,8 @@
 
 
 //电池信息
-#define BMS_Cell_Numer 20	//实际使用电池数量
-#define BMS_Temp_Numer 5	//实际使用温度数量
+#define Default_BMS_Cell_Numer 20	//实际使用电池数量
+#define Default_BMS_Temp_Numer 5	//实际使用温度数量
 
 
 
@@ -22,12 +22,23 @@
 //默认功能开关
 
 #define Default_Fun_DeepSleep		(1)
+
 #define Default_Fun_LightSleep		(1)
+
 #define Default_Fun_Fire			(1)
+
 #define Default_Fun_Heat			(1)
+
 #define Default_Fun_BlueTooth		(1)
+
 #define Default_Fun__4G				(1)
-#define Default_Fun_Balance			(1)
+
+#define Default_Fun_Balance				(0)
+#define Default_Para_BalStartVol		(3500)		//均衡开启电压 单位:0.001V
+#define Default_Para_BalStopVol			(3500)		//均衡关闭电压 单位:0.001V
+#define Default_Para_BalStartDiffVol	(50)		//均衡开启压差 单位:0.001V
+#define Default_Para_BalStopDiffVol		(20)		//均衡关闭压差 单位:0.001V
+
 #define Default_Fun_Temperature		(0x0f)		//温度开关 对应开关了哪几路温度  bit0:第一路 bit1:第二路 ...以此类推
 
 
