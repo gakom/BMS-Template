@@ -27,12 +27,16 @@ Project File Date:  01/31/2022
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-compiling BMS_Balance.c...
-compiling main.c...
+compiling BMS_UpperComputerProtocol.c...
+..\BMS\BMS_UpperComputerProtocol.c(70): warning:  #940-D: missing return statement at end of non-void function "ProcotolReadParam" 
+  }
+..\BMS\BMS_UpperComputerProtocol.c(75): warning:  #177-D: function "ProcotolReadParams"  was declared but never referenced
+  static void ProcotolReadParams(uint8_t* rx,uint16_t rxlen,uint8_t* tx,uint16_t* txlen)
+..\BMS\BMS_UpperComputerProtocol.c: 2 warnings, 0 errors
 linking...
 Program Size: Code=46444 RO-data=1272 RW-data=320 ZI-data=16368  
 FromELF: creating hex file...
-"..\OBJ\Template.axf" - 0 Error(s), 0 Warning(s).
+"..\OBJ\Template.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 

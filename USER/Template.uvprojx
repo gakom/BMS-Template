@@ -728,6 +728,11 @@
               <FileType>1</FileType>
               <FilePath>..\BMS\BMS_Balance.c</FilePath>
             </File>
+            <File>
+              <FileName>BMS_UpperComputerProtocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BMS\BMS_UpperComputerProtocol.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

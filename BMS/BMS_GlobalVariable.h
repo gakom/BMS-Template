@@ -52,7 +52,7 @@ typedef struct
 {
 	int16_t Current;					//总电流 单位:0.01A(充电为正、放电为负)
 
-	uint8_t  BMS_Cell_Numer;				//电池数量
+	uint8_t  BMS_Cell_Numer;			//电池数量
 	uint16_t CellVol[PCB_Cell_Numer];	//单体电压 单位:0.001V
 	uint16_t TotalVol;					//总电压 单位:0.01V
 	uint16_t AverageVol;				//平均电压 单位:0.001V

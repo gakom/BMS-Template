@@ -10,8 +10,8 @@ void BalancePro(void)
 	uint32_t status = 0;
 
 	if(
-		BMSInfo.FuncSwitch.Balance == 1 &&
-		BMSInfo.SystemState == SystemState_Chging &&
+		(BMSInfo.FuncSwitch.Balance == 1) &&
+		(BMSInfo.SystemState == SystemState_Chging) &&
 		(Balance.Status == 0 && BMSInfo.DiffVol > Balance.StartDiffVol) &&
 		(Balance.Status != 0 && BMSInfo.DiffVol > Balance.StopDiffVol)
 	 )
