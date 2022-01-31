@@ -83,7 +83,7 @@ typedef struct
 
 	uint64_t LeftCap;					//剩余容量 单位:1mAs  1Ah = 1000 * 3600 mAs
 	uint64_t RatedCap;					//额定容量 单位:1mAs
-	uint64_t FullCap;					//最大可用容量-单次欠压到过压充满的容量 单位:1mAs
+	uint64_t FullCap;					//最大可用容量、单次欠压到过压充满的容量 单位:1mAs
 
 
 	uint32_t RunDistance;				//行驶里程 单位:1km

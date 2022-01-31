@@ -17,6 +17,24 @@
 
 
 
+
+
+//默认功能开关
+
+#define Default_Fun_DeepSleep		(1)
+#define Default_Fun_LightSleep		(1)
+#define Default_Fun_Fire			(1)
+#define Default_Fun_Heat			(1)
+#define Default_Fun_BlueTooth		(1)
+#define Default_Fun__4G				(1)
+#define Default_Fun_Balance			(1)
+#define Default_Fun_Temperature		(0x0f)		//温度开关 对应开关了哪几路温度  bit0:第一路 bit1:第二路 ...以此类推
+
+
+
+
+//告警保护参参数
+
 //总压过压告警
 #define ParaAlarm_TotalVolOver				(8300)	//单位:0.01V
 #define ParaAlarm_TotalVolOverFree			(8200)	//单位:0.01V

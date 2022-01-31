@@ -139,7 +139,7 @@ void Task_Test_1_task(void *p_arg)
 		WriteRecordForRun();
 		UpdateTemperaturePro();
 		UpdateVoltagePro();
-
+		BalancePro();
 		
 		//SEGGER_RTT_printf(0, "Task_Test_1_task\n");
 		OSTimeDlyHMSM(0,0,0,5,OS_OPT_TIME_HMSM_STRICT,&err);
