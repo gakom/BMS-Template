@@ -64,9 +64,31 @@ bool IsUpperComputerProtocol(uint8_t* rx,uint16_t rxlen)
 
 
 
-static uint8_t ProcotolReadParam(uint16_t addr,uint8_t *buff)
+static uint8_t ProcotolReadParam(uint16_t addr,uint8_t *buff,uint8_t leftlen)
 {
+	uint8_t len = 0;
 
+	switch(addr)
+	{
+		case 0:
+			if(leftlen >= 1)
+			{
+				buff[len++] = BMSInfo.SystemState;
+			}
+			break;
+		case 1:
+			if(leftlen >= 2)
+			{
+				buff[len++] = BMSInfo.TotalVol & 0xff;
+				buff[len++] = BMSInfo.TotalVol >> 8 & 0xff;
+			}
+			break;
+		default:
+			break;
+	}
+
+
+	return len;
 }
 
 
@@ -76,36 +98,45 @@ static void ProcotolReadParams(uint8_t* rx,uint16_t rxlen,uint8_t* tx,uint16_t* 
 {
 	uint16_t crc;
 	uint8_t i;
-	uint8_t	dat_cnt;
-	uint8_t dat_len;
-	uint16_t dat_addr;
-	uint8_t* buff;
+	
+	uint8_t	dat_cnt;			//参数个数
+	uint8_t dat_val_len = 0;	//参数内容所占空间
+	uint16_t dat_addr;			//参数地址
 
-	if (rxlen == rx[3] && rx[3] == 9)
+	uint8_t temp;
+	uint8_t leftlen = PROCOTOL_SIZE - 9;	//剩余数据空间
+
+	if (rxlen == rx[3] && rx[3] == 9)	//长度校验没问题
 	{
-		dat_addr = rx[4] | rx[3];
-		dat_cnt  = rx[6];
+		dat_addr = rx[4] | rx[3];	//参数地址
+		dat_cnt  = rx[6];			//参数个数
 
-		buff = tx + 7;
-
-		dat_len = 0;
 		for(i = 0;i < dat_cnt;i++)
 		{
-			dat_len += ProcotolReadParam(dat_addr + i,buff);
+			//返回当前地址的数据所占的空间大小
+			temp = ProcotolReadParam((dat_addr + i) , (tx + 7 + dat_val_len) , (leftlen));
+
+			if(temp == 0 || leftlen < temp)//剩余空间 < 当前地址的数据所占的空间大小
+				break;
+
+			dat_val_len += temp;	//参数内容占了多少空间
+			leftlen 	-= temp; 	//计算还可以发送多少个参数
 		}
 
-		tx[0] = PROCOTOL_SOI;	//SOI
-		tx[1] = rx[1];			//DID
-		tx[2] = rx[2];			//CID
-		tx[3] = dat_len + 9;	//长度
-		tx[4] = rx[4];			//参数起始地址
-		tx[5] = rx[5];			//参数起始地址
-		tx[6] = rx[6];			//参数个数
-		//参数内容
-		crc = UpperComputerProcotolCRC16(&rx[1],dat_len + 6);
-		tx[7 + dat_len] = crc & 0xff;	//crc
-		tx[8 + dat_len] = crc >> 8;		//crc
-		
+		if(dat_val_len <= PROCOTOL_SIZE - 9)
+		{
+			tx[0] = PROCOTOL_SOI;	//SOI
+			tx[1] = rx[1];			//DID
+			tx[2] = rx[2];			//CID
+			tx[3] = dat_val_len + 9;	//长度
+			tx[4] = rx[4];			//参数起始地址
+			tx[5] = rx[5];			//参数起始地址
+			tx[6] = rx[6];			//参数个数
+			//参数内容
+			crc = UpperComputerProcotolCRC16(&rx[1],dat_val_len + 6);
+			tx[7 + dat_val_len] = crc & 0xff;	//crc
+			tx[8 + dat_val_len] = crc >> 8;		//crc			
+		}
 	}
 }
 

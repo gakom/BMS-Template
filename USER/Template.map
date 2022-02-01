@@ -330,9 +330,9 @@ Removing Unused input sections from the image.
     Removing lib_math.o(.text), (128 bytes).
     Removing lib_math.o(.data), (4 bytes).
     Removing os_app_hooks.o(.text), (200 bytes).
-    Removing bms_uppercomputerprotocol.o(.text), (318 bytes).
+    Removing bms_uppercomputerprotocol.o(.text), (326 bytes).
 
-16 unused section(s) (total 10334 bytes) removed from the image.
+16 unused section(s) (total 10342 bytes) removed from the image.
 
 ==============================================================================
 
