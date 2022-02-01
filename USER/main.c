@@ -10,6 +10,8 @@
 #include "BMS_Temperature.h"
 #include "BMS_Voltage.h"
 #include "BMS_Balance.h"
+#include "BMS_485.h"
+
 
 //#define Degub_Printf(BufferIndex,sFormat, ...)  SEGGER_RTT_printf(BufferIndex,sFormat, ...)
 
@@ -140,6 +142,7 @@ void Task_Test_1_task(void *p_arg)
 		UpdateTemperaturePro();
 		UpdateVoltagePro();
 		BalancePro();
+		Comm485Pro();
 		
 		//SEGGER_RTT_printf(0, "Task_Test_1_task\n");
 		OSTimeDlyHMSM(0,0,0,5,OS_OPT_TIME_HMSM_STRICT,&err);

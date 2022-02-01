@@ -3,6 +3,11 @@
 
 #include "includes.h"
 #include "BMS_Parameter.h"
+#include "BMS_GlobalVariable.h"
+#include "BMS_FaultDiagnose.h"
+#include "BMS_Balance.h"
+
+#define UpperComputerProcotolVer	(106)
 
 
 #define PROCOTOL_SIZE				(255)
@@ -27,6 +32,19 @@
 #define PROCOTOL_RES_DATA_INVALID	(4)	//数据无效
 #define PROCOTOL_RES_BUSY			(5)	//设备忙
 #define PROCOTOL_RES_OTHER			(6)	//其他错误
+
+
+
+
+extern void UpperComputerProtocolPro(uint8_t* rx,uint16_t rxlen,uint8_t* tx,uint16_t* txlen);
+
+
+
+
+
+
+
+
 
 #endif
 

@@ -6,6 +6,11 @@
 
 
 
+//程序版本信息
+#define BMS_SoftwareVer	001
+#define BMS_HardwareVer 120
+
+
 //电池信息
 #define Default_BMS_Cell_Numer 20	//实际使用电池数量
 #define Default_BMS_Temp_Numer 5	//实际使用温度数量

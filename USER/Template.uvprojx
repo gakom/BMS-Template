@@ -733,6 +733,11 @@
               <FileType>1</FileType>
               <FilePath>..\BMS\BMS_UpperComputerProtocol.c</FilePath>
             </File>
+            <File>
+              <FileName>BMS_485.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BMS\BMS_485.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

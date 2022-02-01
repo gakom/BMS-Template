@@ -38,4 +38,7 @@
 ..\obj\bms_uppercomputerprotocol.o: ..\FWLIB\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\bms_uppercomputerprotocol.o: ..\FWLIB\STM32F10x_FWLib\inc\misc.h
 ..\obj\bms_uppercomputerprotocol.o: ..\BMS\BMS_Parameter.h
+..\obj\bms_uppercomputerprotocol.o: ..\BMS\BMS_GlobalVariable.h
+..\obj\bms_uppercomputerprotocol.o: ..\BMS\BMS_FaultDiagnose.h
+..\obj\bms_uppercomputerprotocol.o: ..\BMS\BMS_Balance.h
 ..\obj\bms_uppercomputerprotocol.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

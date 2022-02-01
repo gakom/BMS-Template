@@ -80,6 +80,7 @@ typedef struct
 	uint8_t DchgDepth;					//放电深度
 	uint16_t ChgCount;					//充电次数
 	uint16_t DchgCount;					//放电次数
+	uint16_t CycleCount;				//循环次数
 
 	uint64_t LeftCap;					//剩余容量 单位:1mAs  1Ah = 1000 * 3600 mAs
 	uint64_t RatedCap;					//额定容量 单位:1mAs
@@ -88,6 +89,13 @@ typedef struct
 
 	uint32_t RunDistance;				//行驶里程 单位:1km
 
+	int32_t	CurKCoef;					//校正K值
+	int32_t	CurBCoef;					//校正B值
+
+	uint8_t BatteryID[32];				//电池编号
+
+	uint8_t ServerIPAddr[64];			//服务器IP地址
+	uint16_t ServerPort;				//服务器端口
 
 	enumSystemState SystemState;		//系统状态
 	tFunSwitch		FuncSwitch;			//功能开关位

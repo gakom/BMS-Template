@@ -51,6 +51,7 @@
 "..\obj\bms_voltage.o"
 "..\obj\bms_balance.o"
 "..\obj\bms_uppercomputerprotocol.o"
+"..\obj\bms_485.o"
 --strict --scatter "..\OBJ\Template.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
