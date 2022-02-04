@@ -647,6 +647,170 @@ static uint8_t ProcotolReadParam(uint16_t addr,uint8_t *buff,uint8_t leftlen)
 				buff[len++] = ProtectEnvirTemp_Under.Recovery >> 8 & 0xff;
 			}
 			break;
+
+		case 2040:
+			if(leftlen >= 2)
+			{
+				buff[len++] = AlarmMOSTempOver.Trigger & 0xff;
+				buff[len++] = AlarmMOSTempOver.Trigger >> 8 & 0xff;
+			}
+			break;
+		case 2041:
+			if(leftlen >= 2)
+			{
+				buff[len++] = AlarmMOSTempOver.Recovery & 0xff;
+				buff[len++] = AlarmMOSTempOver.Recovery >> 8 & 0xff;
+			}
+			break;
+
+		case 2042:
+			if(leftlen >= 2)
+			{
+				buff[len++] = ProtectMOSTemp_Over.Trigger & 0xff;
+				buff[len++] = ProtectMOSTemp_Over.Trigger >> 8 & 0xff;
+			}
+			break;
+		case 2043:
+			if(leftlen >= 2)
+			{
+				buff[len++] = ProtectMOSTemp_Over.Recovery & 0xff;
+				buff[len++] = ProtectMOSTemp_Over.Recovery >> 8 & 0xff;
+			}
+			break;
+
+		case 2044:
+			if(leftlen >= 2)
+			{
+				buff[len++] = AlarmChgCurOver.Trigger & 0xff;
+				buff[len++] = AlarmChgCurOver.Trigger >> 8 & 0xff;
+			}
+			break;
+		case 2045:
+			if(leftlen >= 2)
+			{
+				buff[len++] = AlarmChgCurOver.Recovery & 0xff;
+				buff[len++] = AlarmChgCurOver.Recovery >> 8 & 0xff;
+			}
+			break;
+
+		case 2046:
+			if(leftlen >= 2)
+			{
+				buff[len++] = ProtectChgCur_Over.Trigger & 0xff;
+				buff[len++] = ProtectChgCur_Over.Trigger >> 8 & 0xff;
+			}
+			break;
+		case 2047:
+			if(leftlen >= 2)
+			{
+				buff[len++] = ProtectChgCur_Over.Triggertime & 0xff;
+				buff[len++] = ProtectChgCur_Over.Triggertime >> 8 & 0xff;
+			}
+			break;
+		case 2048:
+			if(leftlen >= 2)
+			{
+				buff[len++] = ProtectChgCur_Over.Recoverytime & 0xff;
+				buff[len++] = ProtectChgCur_Over.Recoverytime >> 8 & 0xff;
+			}
+			break;
+
+		case 2049:
+			if(leftlen >= 2)
+			{
+				buff[len++] = AlarmDchgCur_Over.Trigger & 0xff;
+				buff[len++] = AlarmDchgCur_Over.Trigger >> 8 & 0xff;
+			}
+			break;
+		case 2050:
+			if(leftlen >= 2)
+			{
+				buff[len++] = AlarmDchgCur_Over.Recovery & 0xff;
+				buff[len++] = AlarmDchgCur_Over.Recovery >> 8 & 0xff;
+			}
+			break;
+
+		case 2051:
+			if(leftlen >= 2)
+			{
+				buff[len++] = ProtectDchgCur_L1_Over.Trigger & 0xff;
+				buff[len++] = ProtectDchgCur_L1_Over.Trigger >> 8 & 0xff;
+			}
+			break;
+		case 2052:
+			if(leftlen >= 2)
+			{
+				buff[len++] = ProtectDchgCur_L1_Over.Triggertime & 0xff;
+				buff[len++] = ProtectDchgCur_L1_Over.Triggertime >> 8 & 0xff;
+			}
+			break;
+		case 2053:
+			if(leftlen >= 2)
+			{
+				buff[len++] = ProtectDchgCur_L1_Over.Recoverytime & 0xff;
+				buff[len++] = ProtectDchgCur_L1_Over.Recoverytime >> 8 & 0xff;
+			}
+			break;
+
+		case 2054:
+			if(leftlen >= 2)
+			{
+				buff[len++] = ProtectDchgCur_L2_Over.Trigger & 0xff;
+				buff[len++] = ProtectDchgCur_L2_Over.Trigger >> 8 & 0xff;
+			}
+			break;
+		case 2055:
+			if(leftlen >= 2)
+			{
+				buff[len++] = ProtectDchgCur_L2_Over.Triggertime & 0xff;
+				buff[len++] = ProtectDchgCur_L2_Over.Triggertime >> 8 & 0xff;
+			}
+			break;
+		case 2056:
+			if(leftlen >= 2)
+			{
+				buff[len++] = ProtectDchgCur_L2_Over.Recoverytime & 0xff;
+				buff[len++] = ProtectDchgCur_L2_Over.Recoverytime >> 8 & 0xff;
+			}
+			break;
+		case 2057:
+			break;
+		case 2058:
+			break;
+		case 2059:
+			break;
+
+		case 2060:
+			if(leftlen >= 2)
+			{
+				buff[len++] = AlarmDiffVol_Over.Trigger & 0xff;
+				buff[len++] = AlarmDiffVol_Over.Trigger >> 8 & 0xff;
+			}
+			break;
+		case 2061:
+			if(leftlen >= 2)
+			{
+				buff[len++] = AlarmDiffVol_Over.Recovery & 0xff;
+				buff[len++] = AlarmDiffVol_Over.Recovery >> 8 & 0xff;
+			}
+			break;
+
+		case 2062:
+			if(leftlen >= 2)
+			{
+				buff[len++] = ProtectDiffVol_Over.Trigger & 0xff;
+				buff[len++] = ProtectDiffVol_Over.Trigger >> 8 & 0xff;
+			}
+			break;
+		case 2063:
+			if(leftlen >= 2)
+			{
+				buff[len++] = ProtectDiffVol_Over.Recovery & 0xff;
+				buff[len++] = ProtectDiffVol_Over.Recovery >> 8 & 0xff;
+			}
+			break;
+
+
 		default:
 			break;
 	}
